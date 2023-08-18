@@ -1,0 +1,14 @@
+h1 {
+  color: white;
+  text-align: center;
+}
+body {
+  background-color: darkcyan;
+}
+.players-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: larger;
+  margin: 60px;
+}
