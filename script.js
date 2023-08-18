@@ -21,7 +21,7 @@ function playAction(row, col) {
   boardGame[row][col] = currentPlayer;
   //Player Turns
   if (currentPlayer === "X") {
-    currentPlayer = "O";
+    currentPlayer = "O"; //switching player for next move
   } else {
     currentPlayer = "X";
   }
@@ -33,7 +33,7 @@ function playAction(row, col) {
     event.preventDefault();
     play.textContent = "X";
     play.style.fontSize = "90px";
-    playAction(row, col);
+    playAction([row], [col]);
   });
   drawCondition();
 
