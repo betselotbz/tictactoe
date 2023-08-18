@@ -10,6 +10,7 @@ function playAction(row, col) {
   //Validation state before action
   /*check if cell is empty 
     prevent moves in occupied cells*/
+
   let cell = boardGame[row][col];
   if (cell !== "") {
     alert("OCCUPIED");
@@ -24,11 +25,16 @@ function playAction(row, col) {
   } else {
     currentPlayer = "X";
   }
-
   //Validation state after action
   /* need to reflect new state to UI
    */
-  //winningCondition();
+  let play = document.querySelector(".grid-box");
+  document.addEventListener("click", function (event) {
+    event.preventDefault();
+    play.textContent = "X";
+    play.style.fontSize = "90px";
+    playAction(row, col);
+  });
   drawCondition();
 
   // update UI
