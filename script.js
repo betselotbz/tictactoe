@@ -43,52 +43,53 @@ gridBoxes.forEach(function (grids) {
     const row = grids.dataset.row;
     const col = grids.dataset.col;
     playAction(row, col);
-    // winningCondition();
+    winningCondition(currentPlayer);
   });
 });
 function winningCondition() {
   if (
-    (boardGame[0][0],
-    boardGame[1],
-    [1],
-    boardGame[2][2] || boardGame[0][2],
-    boardGame[1][1],
-    (boardGame[2][0] = currentPlayer))
+    (boardGame[0][0] === currentPlayer &&
+      boardGame[1][1] === currentPlayer &&
+      boardGame[2][2] === currentPlayer) ||
+    (boardGame[0][2] === currentPlayer &&
+      boardGame[1][1] === currentPlayer &&
+      boardGame[2][0] === currentPlayer)
   ) {
-    score = score + 1;
-    alert("WIN");
+     alert ("WIN");
   } else {
-    score = score - 1;
+    
     alert("LOST"); //Diagonal Winning
   }
   if (
-    (boardGame[0][0],
-    boardGame[1][0],
-    boardGame[2][0] || boardGame[0][1],
-    boardGame[1][1],
-    boardGame[2][1] || boardGame[0][2],
-    boardGame[1][2],
-    (boardGame[2][2] = currentPlayer))
+    (boardGame[0][0] === currentPlayer &&
+      boardGame[1][0] === currentPlayer &&
+      boardGame[2][0] === currentPlayer) ||
+    (boardGame[0][1] === currentPlayer &&
+      boardGame[1][1] === currentPlayer &&
+      boardGame[2][1] === currentPlayer) ||
+    (boardGame[0][2] === currentPlayer &&
+      boardGame[1][2] === currentPlayer &&
+      boardGame[2][2] === currentPlayer)
   ) {
-    score = score + 1;
-    alert("WIN");
+    return "WIN";
   } else {
-    score = score - 1;
+    
     alert("LOST"); //Vertical Winning
   }
   if (
-    (boardGame[0][0],
-    boardGame[0][1],
-    boardGame[0][2] || boardGame[1][0],
-    boardGame[1][1],
-    boardGame[1][2] || boardGame[2][0],
-    boardGame[2][1],
-    (boardGame[2][2] = currentPlayer))
+    (boardGame[0][0] === currentPlayer &&
+      boardGame[0][1] === currentPlayer &&
+      boardGame[0][2] === currentPlayer) ||
+    (boardGame[1][0] === currentPlayer &&
+      boardGame[1][1] === currentPlayer &&
+      boardGame[1][2] === currentPlayer) ||
+    (boardGame[2][0] === currentPlayer &&
+      boardGame[2][1] === currentPlayer &&
+      boardGame[2][2] === currentPlayer)
   ) {
-    score = score + 1;
-    alert("WIN");
+    return "WIN";
   } else {
-    score = score - 1;
+    
     alert("LOST"); //Horizontal Winning
   }
 }
