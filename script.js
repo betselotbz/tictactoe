@@ -11,8 +11,7 @@ function playAction(row, col) {
   //Validation state before action
   /*check if cell is empty 
     prevent moves in occupied cells*/
-    const row = grids.dataset.row;
-    const col = grids.dataset.col;
+
   let cell = boardGame[row][col];
   if (cell !== "") {
     alert("OCCUPIED");
@@ -41,6 +40,8 @@ gridBoxes.forEach(function (grids) {
     event.preventDefault();
     grids.textContent = "X";
     grids.style.fontSize = "90px";
+    const row = grids.dataset.row;
+    const col = grids.dataset.col;
     playAction(row, col);
     // winningCondition();
   });
