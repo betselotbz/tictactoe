@@ -6,6 +6,7 @@ const boardGame = [
 let currentPlayer = "X";
 let score = 0;
 const gridBoxes = document.querySelectorAll(".grid-box");
+let gameEnd = false;
 
 function playAction(row, col) {
   //Validation state before action
@@ -19,6 +20,7 @@ function playAction(row, col) {
   }
   // update table
   boardGame[row][col] = currentPlayer;
+  winningCondition(); //check winning condition after updating the boardGame
   //Player Turns
   if (currentPlayer === "X") {
     currentPlayer = "O"; //switching player for next move
@@ -38,12 +40,17 @@ function playAction(row, col) {
 gridBoxes.forEach(function (grids) {
   grids.addEventListener("click", function (event) {
     event.preventDefault();
-    grids.innerHTML = currentPlayer;
-    grids.style.fontSize = "90px";
     const row = grids.dataset.row;
     const col = grids.dataset.col;
+    grids.innerHTML = currentPlayer;
+    grids.style.fontSize = "90px";
     playAction(row, col);
-    winningCondition(currentPlayer);
+    console.log(gameEnd);
+    if (gameEnd) {
+      const gameStatus = document.querySelector("#game-status");
+      gameStatus.innerHTML = "Game End";
+      gameStatus.style.fontSize = "90px";
+    }
   });
 });
 function winningCondition() {
@@ -55,10 +62,7 @@ function winningCondition() {
       boardGame[1][1] === currentPlayer &&
       boardGame[2][0] === currentPlayer)
   ) {
-     alert ("WIN");
-  } else {
-    
-    alert("LOST"); //Diagonal Winning
+    gameEnd = true;
   }
   if (
     (boardGame[0][0] === currentPlayer &&
@@ -71,10 +75,7 @@ function winningCondition() {
       boardGame[1][2] === currentPlayer &&
       boardGame[2][2] === currentPlayer)
   ) {
-    return "WIN";
-  } else {
-    
-    alert("LOST"); //Vertical Winning
+    gameEnd = true;
   }
   if (
     (boardGame[0][0] === currentPlayer &&
@@ -87,10 +88,7 @@ function winningCondition() {
       boardGame[2][1] === currentPlayer &&
       boardGame[2][2] === currentPlayer)
   ) {
-    return "WIN";
-  } else {
-    
-    alert("LOST"); //Horizontal Winning
+    gameEnd = true;
   }
 }
 // function trackScore() {}
