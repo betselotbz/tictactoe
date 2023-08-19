@@ -25,7 +25,7 @@ function playAction(row, col) {
   } else {
     currentPlayer = "X";
   }
-  
+
   //Validation state after action
   /* need to reflect new state to UI
    */
@@ -38,7 +38,7 @@ function playAction(row, col) {
 gridBoxes.forEach(function (grids) {
   grids.addEventListener("click", function (event) {
     event.preventDefault();
-    grids.textContent = "X";
+    grids.innerHTML = currentPlayer;
     grids.style.fontSize = "90px";
     const row = grids.dataset.row;
     const col = grids.dataset.col;
@@ -48,12 +48,12 @@ gridBoxes.forEach(function (grids) {
 });
 function winningCondition() {
   if (
-    boardGame[0][0],
+    (boardGame[0][0],
     boardGame[1],
     [1],
     boardGame[2][2] || boardGame[0][2],
     boardGame[1][1],
-    boardGame[2][0] = currentPlayer
+    (boardGame[2][0] = currentPlayer))
   ) {
     score = score + 1;
     alert("WIN");
@@ -61,13 +61,14 @@ function winningCondition() {
     score = score - 1;
     alert("LOST"); //Diagonal Winning
   }
-  if(boardGame[0][0],
+  if (
+    (boardGame[0][0],
     boardGame[1][0],
     boardGame[2][0] || boardGame[0][1],
     boardGame[1][1],
     boardGame[2][1] || boardGame[0][2],
     boardGame[1][2],
-    boardGame[2][2] = currentPlayer
+    (boardGame[2][2] = currentPlayer))
   ) {
     score = score + 1;
     alert("WIN");
@@ -76,13 +77,13 @@ function winningCondition() {
     alert("LOST"); //Vertical Winning
   }
   if (
-    boardGame[0][0],
+    (boardGame[0][0],
     boardGame[0][1],
     boardGame[0][2] || boardGame[1][0],
     boardGame[1][1],
     boardGame[1][2] || boardGame[2][0],
     boardGame[2][1],
-    boardGame[2][2] = currentPlayer
+    (boardGame[2][2] = currentPlayer))
   ) {
     score = score + 1;
     alert("WIN");
@@ -94,5 +95,3 @@ function winningCondition() {
 // function trackScore() {}
 // function drawCondition() {}
 // function reset() {}
-
-playAction(1, 1);
