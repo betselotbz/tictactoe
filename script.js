@@ -4,20 +4,22 @@ const boardGame = [
   ["", "", ""],
 ];
 let currentPlayer = "X";
-let score = 0;
+let scorePlayer1 = 0;
+let scorePlayer2 = 0;
 const gridBoxes = document.querySelectorAll(".grid-box");
 let gameEnd = false;
+const trackScores1 = document.querySelector(".player1");
+const trackScores2 = document.querySelector(".player2");
 
 function playAction(row, col) {
   //Validation state before action
-  /*check if cell is empty 
-    prevent moves in occupied cells*/
+  /*check if cell is empty prevent moves in occupied cells*/
 
   let cell = boardGame[row][col];
   if (cell !== "") {
     alert("OCCUPIED");
-    return;
   }
+
   // update table
   boardGame[row][col] = currentPlayer;
   winningCondition(); //check winning condition after updating the boardGame
@@ -48,10 +50,24 @@ gridBoxes.forEach(function (grids) {
     console.log(gameEnd);
     if (gameEnd) {
       const gameStatus = document.querySelector("#game-status");
-      gameStatus.innerHTML = "Game End";
-      gameStatus.style.fontSize = "90px";
+      gameStatus.innerHTML = "Game Over";
+      //gameStatus.style.fontSize = "90px";
+      if (gameEnd === true) {
+        currentPlayer = ""; //after game over set currentPlayer empty
+      }
     }
   });
+});
+trackScores1.addEventListener("click", function () {
+  if (gameEnd === true) {
+    scorePlayer1 += 1;
+  }
+});
+trackScores1.addEventListener("click", function () {
+  // if (gameEnd === true) {
+  //   scorePlayer2 += 1;
+  //   trackScores1.textContent = p1Score;
+  // }
 });
 function winningCondition() {
   if (
@@ -62,8 +78,10 @@ function winningCondition() {
       boardGame[1][1] === currentPlayer &&
       boardGame[2][0] === currentPlayer)
   ) {
+    // score = score + 1;
     gameEnd = true;
   }
+
   if (
     (boardGame[0][0] === currentPlayer &&
       boardGame[1][0] === currentPlayer &&
@@ -75,6 +93,7 @@ function winningCondition() {
       boardGame[1][2] === currentPlayer &&
       boardGame[2][2] === currentPlayer)
   ) {
+    // score = score + 1;
     gameEnd = true;
   }
   if (
@@ -88,9 +107,13 @@ function winningCondition() {
       boardGame[2][1] === currentPlayer &&
       boardGame[2][2] === currentPlayer)
   ) {
+    // score = score + 1;
     gameEnd = true;
   }
 }
-// function trackScore() {}
+
+// function trackScore() {
+
+// }
 // function drawCondition() {}
 // function reset() {}
