@@ -15,11 +15,19 @@ let gameReallyEnd = false;
 
 function playAction(row, col) {
   //Validation state before action
-  /*check if cell is empty prevent moves in occupied cells*/
 
+  //adding validation
+  if (gameReallyEnd === true) {
+    alert("Game Over");
+    clear();
+    return;
+  }
+  /*check if cell is empty prevent moves in occupied cells*/
   let cell = boardGame[row][col];
+
   if (cell !== "") {
     alert("OCCUPIED");
+    return; //exits so no player can play
   }
 
   // update table
@@ -72,10 +80,8 @@ gridBoxes.forEach(function (grids) {
     if (gameReallyEnd) {
       const gameStatus = document.querySelector("#game-status");
       gameStatus.innerHTML = "Game Over";
+      clear();
       //gameStatus.style.fontSize = "90px";
-      if (gameEnd === true) {
-        currentPlayer = ""; //after game over set currentPlayer empty
-      }
     }
   });
 });
