@@ -1,4 +1,4 @@
-const boardGame = [
+let boardGame = [
   ["", "", ""],
   ["", "", ""],
   ["", "", ""],
@@ -10,6 +10,8 @@ const gridBoxes = document.querySelectorAll(".grid-box");
 let gameEnd = false;
 const trackScores1 = document.querySelector(".player1");
 const trackScores2 = document.querySelector(".player2");
+let gameReallyEnd = false;
+// const tie = document.querySelector(".tie");
 
 function playAction(row, col) {
   //Validation state before action
@@ -23,6 +25,25 @@ function playAction(row, col) {
   // update table
   boardGame[row][col] = currentPlayer;
   winningCondition(); //check winning condition after updating the boardGame
+
+  if (gameEnd === true && currentPlayer === "X") {
+    scorePlayer1 += 1;
+    trackScores1.innerHTML = scorePlayer1;
+    if (scorePlayer1 > 3) {
+      gameReallyEnd = true;
+    }
+  }
+  if (gameEnd === true && currentPlayer === "O") {
+    scorePlayer2 += 1;
+    trackScores2.innerHTML = scorePlayer2;
+    if (scorePlayer2 > 3) {
+      gameReallyEnd = true;
+    }
+  }
+  if (gameEnd === true) {
+    clear();
+  }
+
   //Player Turns
   if (currentPlayer === "X") {
     currentPlayer = "O"; //switching player for next move
@@ -48,7 +69,7 @@ gridBoxes.forEach(function (grids) {
     grids.style.fontSize = "90px";
     playAction(row, col);
     console.log(gameEnd);
-    if (gameEnd) {
+    if (gameReallyEnd) {
       const gameStatus = document.querySelector("#game-status");
       gameStatus.innerHTML = "Game Over";
       //gameStatus.style.fontSize = "90px";
@@ -59,18 +80,6 @@ gridBoxes.forEach(function (grids) {
   });
 });
 
-trackScores1.addEventListener("click", function () {
-  if (gameEnd === true) {
-    scorePlayer1 += 1;
-    trackScores1.textContent = scorePlayer1;
-  }
-});
-trackScores2.addEventListener("click", function () {
-  if (gameEnd === true) {
-    scorePlayer2 += 1;
-    trackScores2.textContent = scorePlayer2;
-  }
-});
 function winningCondition() {
   if (
     (boardGame[0][0] === currentPlayer &&
@@ -80,7 +89,7 @@ function winningCondition() {
       boardGame[1][1] === currentPlayer &&
       boardGame[2][0] === currentPlayer)
   ) {
-    // score = score + 1;
+    scorePlayer2 += 1;
     gameEnd = true;
   }
 
@@ -114,8 +123,18 @@ function winningCondition() {
   }
 }
 
-// function trackScore() {
-
-// }
 // function drawCondition() {}
 // function reset() {}
+function clear() {
+  boardGame = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
+  currentPlayer = "X";
+  gameEnd = false;
+  gridBoxes.forEach(function (grids) {
+    grids.innerHTML = "";
+    // grids.style.fontSize = "90px";
+  });
+}
