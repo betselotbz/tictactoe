@@ -58,16 +58,18 @@ gridBoxes.forEach(function (grids) {
     }
   });
 });
+
 trackScores1.addEventListener("click", function () {
   if (gameEnd === true) {
     scorePlayer1 += 1;
+    trackScores1.textContent = scorePlayer1;
   }
 });
-trackScores1.addEventListener("click", function () {
-  // if (gameEnd === true) {
-  //   scorePlayer2 += 1;
-  //   trackScores1.textContent = p1Score;
-  // }
+trackScores2.addEventListener("click", function () {
+  if (gameEnd === true) {
+    scorePlayer2 += 1;
+    trackScores2.textContent = scorePlayer2;
+  }
 });
 function winningCondition() {
   if (
