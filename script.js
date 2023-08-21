@@ -11,15 +11,14 @@ let gameEnd = false;
 const trackScores1 = document.querySelector(".player1");
 const trackScores2 = document.querySelector(".player2");
 let gameReallyEnd = false;
+const resetGame = document.querySelector(".reset");
 // const tie = document.querySelector(".tie");
-
 function playAction(row, col) {
   //Validation state before action
 
   //adding validation
   if (gameReallyEnd === true) {
     alert("Game Over");
-    clear();
     return;
   }
   /*check if cell is empty prevent moves in occupied cells*/
@@ -80,12 +79,17 @@ gridBoxes.forEach(function (grids) {
     if (gameReallyEnd) {
       const gameStatus = document.querySelector("#game-status");
       gameStatus.innerHTML = "Game Over";
-      clear();
+      clear(); //prevents player from accessing box after game is over
       //gameStatus.style.fontSize = "90px";
     }
   });
 });
-
+resetGame.addEventListener("click", function (event) {
+  event.preventDefault();
+  trackScores1.innerHTML = "Player 1";
+  trackScores2.innerHTML = "Player 2";
+  reset();
+});
 function winningCondition() {
   if (
     (boardGame[0][0] === currentPlayer &&
@@ -110,7 +114,6 @@ function winningCondition() {
       boardGame[1][2] === currentPlayer &&
       boardGame[2][2] === currentPlayer)
   ) {
-    // score = score + 1;
     gameEnd = true;
   }
   if (
@@ -124,13 +127,12 @@ function winningCondition() {
       boardGame[2][1] === currentPlayer &&
       boardGame[2][2] === currentPlayer)
   ) {
-    // score = score + 1;
     gameEnd = true;
   }
 }
 
 // function drawCondition() {}
-// function reset() {}
+
 function clear() {
   boardGame = [
     ["", "", ""],
@@ -143,4 +145,7 @@ function clear() {
     grids.innerHTML = "";
     // grids.style.fontSize = "90px";
   });
+}
+function reset() {
+  clear();
 }
