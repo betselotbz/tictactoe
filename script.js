@@ -10,9 +10,10 @@ const gridBoxes = document.querySelectorAll(".grid-box");
 let gameEnd = false;
 const trackScores1 = document.querySelector(".player1");
 const trackScores2 = document.querySelector(".player2");
+const tieElement = document.querySelector(".tie");
 let gameReallyEnd = false;
 const resetGame = document.querySelector(".reset");
-// const tie = document.querySelector(".tie");
+
 function playAction(row, col) {
   //Validation state before action
 
@@ -32,30 +33,43 @@ function playAction(row, col) {
   // update table
   boardGame[row][col] = currentPlayer;
   winningCondition(); //check winning condition after updating the boardGame
+  const isTie = drawCondition();
+  if (isTie === true) {
+    alert("Tie");
+    clear();
+    return;
+  }
 
   if (gameEnd === true && currentPlayer === "X") {
     scorePlayer1 += 1;
     trackScores1.innerHTML = scorePlayer1;
-    if (scorePlayer1 > 3) {
+    if (scorePlayer1 > 2) {
       gameReallyEnd = true;
+
+      alert("Player 1 Win");
+      return;
     }
   }
   if (gameEnd === true && currentPlayer === "O") {
     scorePlayer2 += 1;
     trackScores2.innerHTML = scorePlayer2;
-    if (scorePlayer2 > 3) {
+    if (scorePlayer2 > 2) {
       gameReallyEnd = true;
+
+      alert("Player 2 Win");
+      return;
     }
-  }
-  if (gameEnd === true) {
-    clear();
   }
 
   //Player Turns
-  if (currentPlayer === "X") {
-    currentPlayer = "O"; //switching player for next move
+  if (gameEnd === true) {
+    clear();
   } else {
-    currentPlayer = "X";
+    if (currentPlayer === "X") {
+      currentPlayer = "O"; //switching player for next move
+    } else {
+      currentPlayer = "X";
+    }
   }
 
   //Validation state after action
@@ -79,7 +93,9 @@ gridBoxes.forEach(function (grids) {
     if (gameReallyEnd) {
       const gameStatus = document.querySelector("#game-status");
       gameStatus.innerHTML = "Game Over";
-      clear(); //prevents player from accessing box after game is over
+
+      clear();
+      //prevents player from accessing box after game is over
       //gameStatus.style.fontSize = "90px";
     }
   });
@@ -90,6 +106,7 @@ resetGame.addEventListener("click", function (event) {
   trackScores2.innerHTML = "Player 2";
   reset();
 });
+
 function winningCondition() {
   if (
     (boardGame[0][0] === currentPlayer &&
@@ -99,7 +116,6 @@ function winningCondition() {
       boardGame[1][1] === currentPlayer &&
       boardGame[2][0] === currentPlayer)
   ) {
-    scorePlayer2 += 1;
     gameEnd = true;
   }
 
@@ -131,7 +147,23 @@ function winningCondition() {
   }
 }
 
-// function drawCondition() {}
+function drawCondition() {
+  let tableIsFull = true;
+  for (let i = 0; i < boardGame.length; i++) {
+    const row = boardGame[i];
+    for (let j = 0; j < row.length; j++) {
+      //accessing cell
+      const cell = boardGame[i][j];
+      if (cell === "") {
+        tableIsFull = false;
+      }
+    }
+  }
+  if (tableIsFull === true && gameEnd === false) {
+    return true;
+  }
+  return false;
+}
 
 function clear() {
   boardGame = [
@@ -148,4 +180,7 @@ function clear() {
 }
 function reset() {
   clear();
+  gameReallyEnd = false;
+  scorePlayer1 = 0;
+  scorePlayer2 = 0;
 }
