@@ -14,7 +14,7 @@ const tieElement = document.querySelector(".tie");
 let gameReallyEnd = false;
 const resetGame = document.querySelector(".reset");
 
-function playAction(row, col) {
+function playAction(row, col, grids) {
   //Validation state before action
 
   //adding validation
@@ -29,7 +29,8 @@ function playAction(row, col) {
     alert("OCCUPIED");
     return; //exits so no player can play
   }
-
+  grids.innerHTML = currentPlayer;
+  grids.style.fontSize = "90px";
   // update table
   boardGame[row][col] = currentPlayer;
   winningCondition(); //check winning condition after updating the boardGame
@@ -86,9 +87,8 @@ gridBoxes.forEach(function (grids) {
     event.preventDefault();
     const row = grids.dataset.row;
     const col = grids.dataset.col;
-    grids.innerHTML = currentPlayer;
-    grids.style.fontSize = "90px";
-    playAction(row, col);
+
+    playAction(row, col, grids);
     console.log(gameEnd);
     if (gameReallyEnd) {
       const gameStatus = document.querySelector("#game-status");
