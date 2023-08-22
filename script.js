@@ -171,7 +171,7 @@ function clear() {
     ["", "", ""],
     ["", "", ""],
   ];
-  currentPlayer = "X";
+  // currentPlayer = "X";
   gameEnd = false;
   gridBoxes.forEach(function (grids) {
     grids.innerHTML = "";
@@ -180,6 +180,8 @@ function clear() {
 }
 function reset() {
   clear();
+  const gameStatus = document.querySelector("#game-status");
+  gameStatus.innerHTML = "";
   gameReallyEnd = false;
   scorePlayer1 = 0;
   scorePlayer2 = 0;
