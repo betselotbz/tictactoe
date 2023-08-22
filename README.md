@@ -9,6 +9,7 @@ Welcome to the Tic Tac Toe game. It is a a two player game in which each player 
 - CSS
 
 ## Wireframes and User Stories
+<img width="693" alt="Screenshot 2023-08-22 at 11 29 56 AM" src="https://github.com/betselotbz/tictactoe/assets/141344995/01555f83-cfc5-484c-ac60-d14004a4d4ba">
 
 <img width="1449" alt="Screenshot 2023-08-21 at 10 18 18 PM" src="https://github.com/betselotbz/tictactoe/assets/141344995/54d1ac02-2b59-4d0c-a475-099f53eac05e">
 
