@@ -72,14 +72,6 @@ function playAction(row, col, grids) {
       currentPlayer = "X";
     }
   }
-
-  //Validation state after action
-  /* need to reflect new state to UI
-   */
-
-  //drawCondition();
-
-  // update UI
 }
 
 gridBoxes.forEach(function (grids) {
@@ -93,7 +85,6 @@ gridBoxes.forEach(function (grids) {
     if (gameReallyEnd) {
       const gameStatus = document.querySelector("#game-status");
       gameStatus.innerHTML = "Game Over";
-
       clear();
       //prevents player from accessing box after game is over
       //gameStatus.style.fontSize = "90px";
@@ -171,11 +162,10 @@ function clear() {
     ["", "", ""],
     ["", "", ""],
   ];
-  // currentPlayer = "X";
+
   gameEnd = false;
   gridBoxes.forEach(function (grids) {
     grids.innerHTML = "";
-    // grids.style.fontSize = "90px";
   });
 }
 function reset() {
