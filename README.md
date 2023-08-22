@@ -20,7 +20,7 @@ Welcome to the Tic Tac Toe game. It is a a two player game in which each player 
 5. As a user, I should be shown a message when I win, lose or tie
 6. As a user, I should not be able to continue playing once I win, lose, or tie
 7. As a user, I should be able to play the game again without refreshing the page
-
+8. As a user, I should be able to play the game on different screen sizes wihtout game layout changing
 
 ## Planning and Development Process
 
